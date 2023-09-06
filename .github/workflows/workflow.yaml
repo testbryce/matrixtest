@@ -3,12 +3,6 @@ name: workflow
 on:
   push:
     branches: [main]
-  workflow_dispatch: 
-    inputs:
-      deploy:
-        type: boolean
-        default: false
-        required: false
 
 env:
   SOLUTION_DIR: ./src/console
@@ -20,7 +14,6 @@ jobs:
       publish-artifact: true
   
   deploy-npe:
-    if: ${{inputs.deploy}}
     needs: build-and-test
     
     uses: ./.github/workflows/run.yaml
@@ -29,7 +22,6 @@ jobs:
       environment: npe
       
   deploy-prd:
-    if: ${{inputs.deploy}}
     needs: deploy-npe
 
     uses : ./.github/workflows/run.yaml
