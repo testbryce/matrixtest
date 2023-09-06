@@ -33,8 +33,6 @@ jobs:
           with:
             name: console-app
         
-        - run: ll -a
-
         - name: run
           run: ./console-app/out/console.exe
 
