@@ -2,7 +2,12 @@
 name: Build and test LeanIX Function App solution
 
 on:
+  workflow_dispatch: #This would normally be a merge trigger
+
   workflow_call: 
+    inputs:
+      publish-artifact:
+        type: boolean
 
 env:
   PROJECT_DIR: ./src/console
@@ -25,8 +30,10 @@ jobs:
           ls
         
       - name: Upload artifacts
+        if: ${{inputs.publish-artifact}}
         uses: actions/upload-artifact@v3
         with:
           name: console-app
           path: ${{env.PROJECT_DIR}}/out
+
           

@@ -15,7 +15,9 @@ env:
 
 jobs:
   build-and-test:
-    uses: ./.github/workflows/build.yaml      
+    uses: ./.github/workflows/build.yaml
+    with:
+      publish-artifact: true
   
   deploy-npe:
     if: ${{inputs.deploy}}
