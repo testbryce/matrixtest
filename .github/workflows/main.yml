@@ -1,0 +1,21 @@
+name: nested jobs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Execute a build"
+
+  jobs:
+    deploy-dev:
+      runs-on: ubuntu-latest
+      steps:
+        - run: echo "Deploy dev"
+    
+  deploy-prd:
+    runs-on: ubuntu-latest
+      steps:
+        - run: echo "Deploy prd"
