@@ -13,7 +13,7 @@ jobs:
     with:
       publish-artifact: true
 
-  terarform-plan-npe:
+  terraform-plan-npe:
     uses: ./.github/workflows/terraform-plan.yaml
     with:
       environment: npe
@@ -21,7 +21,7 @@ jobs:
   deploy-npe:
     needs: 
       - build-and-test
-      - terarform-plan-npe    
+      - terraform-plan-npe    
     uses: ./.github/workflows/run.yaml
     secrets: inherit
     with:
@@ -35,7 +35,7 @@ jobs:
   deploy-prd:
     needs:
       - deploy-npe
-      - terarform-plan-npe    
+      - terraform-plan-prd    
 
     uses : ./.github/workflows/run.yaml
     secrets: inherit
