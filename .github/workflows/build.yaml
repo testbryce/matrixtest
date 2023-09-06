@@ -1,0 +1,36 @@
+
+name: Build and test LeanIX Function App solution
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: 
+
+env:
+  PROJECT_DIR: ./src/console
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '6.0.x'
+      - name: Install dependencies
+        run: dotnet restore
+        working-directory: ${{env.PROJECT_DIR}}
+      
+      - name: Build
+        working-directory: '${{env.PROJECT_DIR}}'
+        run: dotnet build --configuration Release --no-restore -o ${{env.PROJECT_DIR}}/out
+
+      - name: Zip
+        run: zip ${{env.PROJECT_DIR}}/out.zip ${{env.PROJECT_DIR}}/out -r
+        
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: console-app
+          path: ${{env.PROJECT_DIR}}/out.zip

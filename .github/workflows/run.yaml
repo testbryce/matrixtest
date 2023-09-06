@@ -1,0 +1,31 @@
+
+name: Build and test LeanIX Function App solution
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/workflows/build-and-test.yaml
+      - function-app/src/**/*
+      - function-app/tests/**/*
+
+env:
+  PROJECT_DIR: ./src/console
+  tf_dir: ./function-app/infrastructure
+  tf_plan_file: tfplan.binary
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Download artifacts
+          uses: actions/download-artifact@v3
+          with:
+            name: console-app
+        
+        - name: Unzip
+          run: unzip /console-app/out.zip
+
+        - name: run
+          run: ./console-app/out/console.exe
+        
