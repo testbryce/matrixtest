@@ -1,5 +1,5 @@
 
-name: Build and test LeanIX Function App solution
+name: Build and test 
 
 on:
   workflow_dispatch: #This would normally be a merge trigger

@@ -1,5 +1,5 @@
 
-name: Build and test LeanIX Function App solution
+name: Run (deploy)
 
 on:
   workflow_call:
