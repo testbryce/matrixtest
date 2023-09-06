@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Plan
-        run: Executing pre-plan
+        run: echo "Executing pre-plan"
 
   run:
     runs-on: ubuntu-latest
