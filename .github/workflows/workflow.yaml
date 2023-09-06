@@ -14,7 +14,7 @@ jobs:
       publish-artifact: true
 
   terarform-plan-npe:
-    uses: ./github/workflows/terraform-plan.yaml
+    uses: ./.github/workflows/terraform-plan.yaml
     with:
       environment: npe
   
@@ -28,7 +28,7 @@ jobs:
       environment: npe
   
   terraform-plan-prd:
-    uses: ./github/workflows/terraform-plan.yaml
+    uses: ./.github/workflows/terraform-plan.yaml
     with:
       environment: prd
       
