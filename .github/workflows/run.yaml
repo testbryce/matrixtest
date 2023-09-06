@@ -26,6 +26,6 @@ jobs:
           run: ls -R
             
         - name: run
-          run: ./console-app/out/console.exe
+          run: ./console-app/out/console
 
         
