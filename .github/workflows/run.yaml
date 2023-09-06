@@ -7,9 +7,6 @@ on:
       environment:
         type: string
         required: true
-      needs:
-        type: string
-        required: false
 
 env:
   PROJECT_DIR: ./src/console
@@ -17,15 +14,8 @@ env:
   tf_plan_file: tfplan.binary
 
 jobs:
-  plan:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Plan
-        run: echo "Executing pre-plan"
-
   run:
     runs-on: ubuntu-latest
-
     environment: ${{inputs.environment}}
     steps:
         - name: Download artifacts
