@@ -22,10 +22,11 @@ jobs:
           uses: actions/download-artifact@v3
           with:
             name: console-app
+            path: console-app
         - name: test download
           run: ls -R
             
         - name: run
-          run: ./console-app/out/console
+          run: ./console-app/console
 
         
