@@ -12,17 +12,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      
       - name: Setup dotnet
         uses: actions/setup-dotnet@v2
         with:
           dotnet-version: '7.0.x'
-      - name: Install dependencies
-        run: dotnet restore
-        working-directory: ${{env.PROJECT_DIR}}
       
       - name: Build
         working-directory: '${{env.PROJECT_DIR}}'
-        run: dotnet build --configuration Release --no-restore -o ${{env.PROJECT_DIR}}/out
+        run: |
+          dotnet build --configuration Release -o ${{env.PROJECT_DIR}}/out
+          ls ${{env.PROJECT_DIR}}
 
       - name: Zip
         run: zip ${{env.PROJECT_DIR}}/out.zip ${{env.PROJECT_DIR}}/out -r
