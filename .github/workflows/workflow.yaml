@@ -13,29 +13,29 @@ jobs:
     with:
       publish-artifact: true
 
-  terraform-plan-npe:
+  plan-infrastructure:
+    strategy:
+      matrix:
+        include:
+          - environment: npe
+          - environmnet: prd
+
     uses: ./.github/workflows/terraform-plan.yaml
     with:
-      environment: npe
-  
+      environment: ${{matrix.environment}}
+
   deploy-npe:
     needs: 
       - build-and-test
-      - terraform-plan-npe    
+      - plan-infrastructure
     uses: ./.github/workflows/run.yaml
     secrets: inherit
     with:
       environment: npe
-  
-  terraform-plan-prd:
-    uses: ./.github/workflows/terraform-plan.yaml
-    with:
-      environment: prd
       
   deploy-prd:
     needs:
       - deploy-npe
-      - terraform-plan-prd    
 
     uses : ./.github/workflows/run.yaml
     secrets: inherit
