@@ -1,0 +1,36 @@
+name: workflow
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: 
+    inputs:
+      deploy:
+        type: boolean
+        default: false
+        required: false
+
+env:
+  SOLUTION_DIR: ./src/console
+
+jobs:
+  build-and-test:
+    uses: ./.github/workflows/build.yaml      
+  
+  deploy-npe:
+    if: ${{inputs.deploy}}
+    needs: build-and-test
+    
+    uses: ./.github/workflows/run.yaml
+    secrets: inherit
+    with:
+      environment: npe
+      
+  deploy-prd:
+    if: ${{inputs.deploy}}
+    needs: deploy-npe
+
+    uses : ./.github/workflows/run.yaml
+    secrets: inherit
+    with:
+      environment: prd

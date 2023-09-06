@@ -2,9 +2,7 @@
 name: Build and test LeanIX Function App solution
 
 on:
-  push:
-    branches: [main]
-  workflow_dispatch: 
+  workflow_call: 
 
 env:
   PROJECT_DIR: ./src/console

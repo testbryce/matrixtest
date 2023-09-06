@@ -2,12 +2,14 @@
 name: Build and test LeanIX Function App solution
 
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - .github/workflows/build-and-test.yaml
-      - function-app/src/**/*
-      - function-app/tests/**/*
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+        required: true
+      needs:
+        type: string
+        required: false
 
 env:
   PROJECT_DIR: ./src/console
@@ -15,8 +17,15 @@ env:
   tf_plan_file: tfplan.binary
 
 jobs:
+  plan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Plan
+        run: Executing pre-plan
+
   build:
     runs-on: ubuntu-latest
+    environment: ${{inputs.environment}}
     steps:
         - name: Download artifacts
           uses: actions/download-artifact@v3
