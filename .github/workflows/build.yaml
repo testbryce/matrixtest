@@ -21,8 +21,8 @@ jobs:
       - name: Build
         working-directory: '${{env.PROJECT_DIR}}'
         run: |
-          dotnet build --configuration Release -o ${{env.PROJECT_DIR}}/out
-          ls ${{env.PROJECT_DIR}}
+          dotnet build console.csproj --configuration Release -o out
+          ls
 
       - name: Zip
         run: zip ${{env.PROJECT_DIR}}/out.zip ${{env.PROJECT_DIR}}/out -r
