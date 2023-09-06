@@ -23,12 +23,10 @@ jobs:
         run: |
           dotnet build console.csproj --configuration Release -o out
           ls
-
-      - name: Zip
-        run: zip ${{env.PROJECT_DIR}}/out.zip ${{env.PROJECT_DIR}}/out -r
         
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: console-app
-          path: ${{env.PROJECT_DIR}}/out.zip
+          path: ${{env.PROJECT_DIR}}/out
+          
