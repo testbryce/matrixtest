@@ -24,4 +24,4 @@ jobs:
             
         - name: run
         
-          run: ll -a
+          run: ls -R
