@@ -24,6 +24,4 @@ jobs:
             
         - name: run
         
-          run: ls ./console-app
-
-        
+          run: ll -a
