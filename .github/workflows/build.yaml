@@ -4,10 +4,7 @@ name: Build and test
 on:
   workflow_dispatch: #This would normally be a merge trigger
 
-  workflow_call: 
-    inputs:
-      publish-artifact:
-        type: boolean
+  workflow_call:
 
 env:
   PROJECT_DIR: ./src/console
@@ -24,16 +21,12 @@ jobs:
           dotnet-version: '7.0.x'
       
       - name: Build
-        working-directory: '${{env.PROJECT_DIR}}'
-        run: |
-          dotnet build console.csproj --configuration Release -o out
-          ls
+        run: dotnet build ${{env.PROJECT_DIR}}/console.csproj --configuration Release -o out
         
       - name: Upload artifacts
-        if: ${{inputs.publish-artifact}}
         uses: actions/upload-artifact@v3
         with:
           name: console-app
-          path: ${{env.PROJECT_DIR}}/out
+          path: ./out
 
           

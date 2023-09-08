@@ -3,10 +3,6 @@ name: Run (deploy)
 
 on:
   workflow_call:
-    inputs:
-      environment:
-        type: string
-        required: true
 
 env:
   PROJECT_DIR: ./src/console
@@ -16,17 +12,18 @@ env:
 jobs:
   run:
     runs-on: ubuntu-latest
-    environment: ${{inputs.environment}}
+
     steps:
         - name: Download artifacts
           uses: actions/download-artifact@v3
           with:
             name: console-app
-            path: console-app
+
         - name: test download
           run: ls -R
             
         - name: run
-          run: ./console-app/console
+        
+          run: ls ./console-app
 
         

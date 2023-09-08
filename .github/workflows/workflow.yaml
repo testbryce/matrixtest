@@ -8,36 +8,9 @@ env:
   SOLUTION_DIR: ./src/console
 
 jobs:
-  build-and-test:
+  build:
     uses: ./.github/workflows/build.yaml
-    with:
-      publish-artifact: true
 
-  plan-infrastructure:
-    strategy:
-      matrix:
-        include:
-          - environment: npe
-          - environmnet: prd
-
-    uses: ./.github/workflows/terraform-plan.yaml
-    with:
-      environment: ${{matrix.environment}}
-
-  deploy-npe:
-    needs: 
-      - build-and-test
-      - plan-infrastructure
+  run:
+    needs: build
     uses: ./.github/workflows/run.yaml
-    secrets: inherit
-    with:
-      environment: npe
-      
-  deploy-prd:
-    needs:
-      - deploy-npe
-
-    uses : ./.github/workflows/run.yaml
-    secrets: inherit
-    with:
-      environment: prd
